@@ -4,8 +4,7 @@ pipeline {
     stages {
         stage('build image') {
             steps {
-            sh 
-            """
+            sh """
             docker ps -a -q | xargs --no-run-if-empty docker container rm -f
             docker build -t osamamagdy/django:latest .
             """    
@@ -25,8 +24,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) 
                 {
-                sh 
-                """
+                sh """
                 docker login -u ${USERNAME}  -p ${PASSWORD}
                 docker push osamamagdy/django:latest
                 """
@@ -43,8 +41,7 @@ pipeline {
         }
         stage('deploy image') {
             steps {
-            sh 
-            """
+            sh """
             docker run -d -p 8000:8000 osamamagdy/django:latest        
             """    
             }
