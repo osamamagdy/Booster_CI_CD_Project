@@ -9,9 +9,9 @@ pipeline {
 
                 sh """
                 docker ps -a -q | xargs --no-run-if-empty docker container rm -f
-                docker build . -f dockerfile -t osamamagdy/Django:latest
+                docker build . -f dockerfile -t osamamagdy/django:latest
                 docker login -u ${USERNAME}  -p ${PASSWORD}
-                docker push osamamagdy/Django:latest
+                docker push osamamagdy/django:latest
                 
                 """
 
@@ -24,7 +24,7 @@ pipeline {
             steps {
 
                 sh """
-                docker run -d -p 8000:8000 osamamagdy/Django:latest
+                docker run -d -p 8000:8000 osamamagdy/django:latest
                 
                 """
 
