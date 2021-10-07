@@ -2,20 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout code') {
-            steps {
-            checkout scm
-            }
-            post {
-                success {
-                     slackSend (color:"#00FF00", message: "Master: Checkout code success")
-                }
-                failure {
-                     slackSend (color:"#FF0000", message: "Master: Checkout code failure")
-                }
-           }
-
-        }
         stage('build image') {
             steps {
             sh """
